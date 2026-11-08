@@ -43,8 +43,8 @@ function renderProjects(items) {
     card.className = "project-card";
     const title = escapeHtml(p.title || "Projet sans titre");
     const author = escapeHtml(p.author || "Auteur non précisé");
-    const description = escapeHtml(p.description || "");
-    const problem = escapeHtml(p.problem || "Non précisé");
+    const description = escapeHtml(p.description || p.Description || "Description non disponible");
+const problem = escapeHtml(p.problem || p.Problem || "Non précisé");
     card.innerHTML = `<div class="project-top"><span class="project-number">PROJET ${String(i+1).padStart(2,"0")}</span><span class="author">Proposé par ${author}</span></div><h3>${title}</h3><p>${description}</p><div class="problem"><b>PROBLÈME À RÉSOUDRE</b><p>${problem}</p></div>`;
     projectGrid.appendChild(card);
     const option = document.createElement("option");
