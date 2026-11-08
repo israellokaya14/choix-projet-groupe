@@ -119,7 +119,7 @@ loginBtn.addEventListener("click", async () => {
   }
   try {
     if (currentUser) await auth.signOut();
-    else await auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    else await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   } catch (e) { voteMessage.textContent = "Connexion impossible : " + e.message; }
 });
 
