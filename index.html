@@ -33,7 +33,27 @@
     <section id="projets" class="project-grid" aria-live="polite">
       <div class="empty">Les propositions seront affichées ici dès qu'elles auront été ajoutées.</div>
     </section>
+<section class="submission-section">
+  <h2>Proposer une idée de projet</h2>
+  <p>Présentez votre idée aux autres membres du groupe.</p>
 
+  <form id="project-form">
+    <label>Nom de l'étudiant</label>
+    <input type="text" id="author" required placeholder="Votre nom">
+
+    <label>Titre du projet</label>
+    <input type="text" id="title" required placeholder="Nom du projet">
+
+    <label>Description de l'idée</label>
+    <textarea id="description" required placeholder="Expliquez votre idée"></textarea>
+
+    <label>Problème à résoudre</label>
+    <textarea id="problem" required placeholder="Quel problème votre projet veut-il résoudre ?"></textarea>
+
+    <button type="submit" class="button button-accent">Envoyer ma proposition</button>
+    <p id="form-message"></p>
+  </form>
+</section>
     <section class="vote-section">
       <div class="vote-copy">
         <span class="section-tag">ÉTAPE 02</span>

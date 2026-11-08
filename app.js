@@ -142,6 +142,33 @@ voteBtn.addEventListener("click", async () => {
     voteBtn.disabled = false;
   }
 });
+const projectForm = document.getElementById("project-form");
 
+projectForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formMessage = document.getElementById("form-message");
+
+  if (!currentUser) {
+    formMessage.textContent = "Connectez-vous avec Google avant de proposer une idée.";
+    return;
+  }
+
+  try {
+    await db.collection("projects").add({
+      author: document.getElementById("author").value.trim(),
+      title: document.getElementById("title").value.trim(),
+      description: document.getElementById("description").value.trim(),
+      problem: document.getElementById("problem").value.trim(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    formMessage.textContent = "Votre proposition a été enregistrée avec succès !";
+    projectForm.reset();
+
+  } catch (error) {
+    formMessage.textContent = "Erreur : " + error.message;
+  }
+});
 if (configured) startFirebase();
 else renderProjects(demoProjects);
