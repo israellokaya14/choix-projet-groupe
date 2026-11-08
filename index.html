@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Découvrons les propositions et choisissons ensemble notre projet.">
+  <title>Choix du projet | Groupe</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">TRAVAIL PRATIQUE · GROUPE DE 10</span>
+      <h1>Choisissons notre<br><span>projet ensemble.</span></h1>
+      <p>Découvrez les idées proposées par vos camarades, comparez-les, puis votez pour celle que vous souhaitez réaliser.</p>
+      <a class="button button-light" href="#projets">Découvrir les projets ↓</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <span class="section-tag">ÉTAPE 01</span>
+        <h2>Les propositions</h2>
+        <p>Chaque idée est présentée avec le nom de son auteur et une explication simple du problème à résoudre.</p>
+      </div>
+      <div class="count-card"><strong id="project-count">0</strong><span>projet(s) proposé(s)</span></div>
+    </section>
+
+    <section id="projets" class="project-grid" aria-live="polite">
+      <div class="empty">Les propositions seront affichées ici dès qu'elles auront été ajoutées.</div>
+    </section>
+
+    <section class="vote-section">
+      <div class="vote-copy">
+        <span class="section-tag">ÉTAPE 02</span>
+        <h2>À vous de choisir</h2>
+        <p>Connectez-vous avec votre compte Google, choisissez une seule proposition et confirmez votre vote. Vous pourrez consulter les résultats après avoir voté.</p>
+      </div>
+      <div class="vote-box">
+        <div id="auth-status">Vous n'êtes pas encore connecté.</div>
+        <button id="login-btn" class="button button-dark">Se connecter avec Google</button>
+        <div id="vote-area" hidden>
+          <label for="project-select">Votre projet préféré</label>
+          <select id="project-select"><option value="">Choisir un projet…</option></select>
+          <button id="vote-btn" class="button button-accent">Confirmer mon vote</button>
+        </div>
+        <p id="vote-message" class="message" role="status"></p>
+      </div>
+    </section>
+
+    <section class="results-section">
+      <div>
+        <span class="section-tag">RÉSULTATS</span>
+        <h2>Les votes</h2>
+        <p>Les résultats se mettent à jour automatiquement.</p>
+      </div>
+      <div id="results" class="results-list"><p class="muted">Les résultats apparaîtront ici.</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>CHOIX DU PROJET</strong>
+    <span>Un groupe · Des idées · Une décision collective</span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

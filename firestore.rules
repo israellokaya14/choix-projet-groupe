@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{projectId} {
+      allow read: if true;
+      // Seul le propriétaire/admin ajoute les projets depuis Firebase Console.
+      allow write: if false;
+    }
+    match /votes/{userId} {
+      allow read: if true;
+      // Un compte Google connecté peut créer un seul vote, stocké sous son UID.
+      allow create: if request.auth != null
+                    && request.auth.uid == userId
+                    && request.resource.data.keys().hasOnly(['projectId', 'createdAt'])
+                    && request.resource.data.projectId is string;
+      allow update, delete: if false;
+    }
+  }
+}
