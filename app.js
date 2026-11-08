@@ -74,6 +74,9 @@ function startFirebase() {
   firebase.initializeApp(firebaseConfig);
   auth = firebase.auth();
   db = firebase.firestore();
+  auth.getRedirectResult().catch(err => {
+  voteMessage.textContent = "Erreur de connexion : " + err.message;
+});
 
   db.collection("projects").orderBy("createdAt", "asc").onSnapshot(snapshot => {
     renderProjects(snapshot.docs.map(d => ({id:d.id, ...d.data()})));
