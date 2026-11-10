@@ -3,12 +3,10 @@
   2) Remplacez les valeurs ci-dessous par la configuration de votre projet.
 */
 const firebaseConfig = {
-  apiKey: "AIzaSyB3_E6Q4pmAY9Gkar079LBAtT9M0lXELRQ",
-  authDomain: "choixprojetgroupe.firebaseapp.com",
-  projectId: "choixprojetgroupe",
-  storageBucket: "choixprojetgroupe.firebasestorage.app",
-  messagingSenderId: "884115095164",
-  appId: "1:884115095164:web:06e20693cc7a439e5953f9"
+  apiKey: "VOTRE_API_KEY",
+  authDomain: "VOTRE_PROJET.firebaseapp.com",
+  projectId: "VOTRE_PROJECT_ID",
+  appId: "VOTRE_APP_ID"
 };
 
 const demoProjects = [
@@ -43,8 +41,8 @@ function renderProjects(items) {
     card.className = "project-card";
     const title = escapeHtml(p.title || "Projet sans titre");
     const author = escapeHtml(p.author || "Auteur non précisé");
-    const description = escapeHtml(p.description || p.Description || "Description non disponible");
-const problem = escapeHtml(p.problem || p.Problem || "Non précisé");
+    const description = escapeHtml(p.description || "");
+    const problem = escapeHtml(p.problem || "Non précisé");
     card.innerHTML = `<div class="project-top"><span class="project-number">PROJET ${String(i+1).padStart(2,"0")}</span><span class="author">Proposé par ${author}</span></div><h3>${title}</h3><p>${description}</p><div class="problem"><b>PROBLÈME À RÉSOUDRE</b><p>${problem}</p></div>`;
     projectGrid.appendChild(card);
     const option = document.createElement("option");
@@ -74,9 +72,6 @@ function startFirebase() {
   firebase.initializeApp(firebaseConfig);
   auth = firebase.auth();
   db = firebase.firestore();
-  auth.getRedirectResult().catch(err => {
-  voteMessage.textContent = "Erreur de connexion : " + err.message;
-});
 
   db.collection("projects").orderBy("createdAt", "asc").onSnapshot(snapshot => {
     renderProjects(snapshot.docs.map(d => ({id:d.id, ...d.data()})));
@@ -142,33 +137,6 @@ voteBtn.addEventListener("click", async () => {
     voteBtn.disabled = false;
   }
 });
-const projectForm = document.getElementById("project-form");
 
-projectForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formMessage = document.getElementById("form-message");
-
-  if (!currentUser) {
-    formMessage.textContent = "Connectez-vous avec Google avant de proposer une idée.";
-    return;
-  }
-
-  try {
-    await db.collection("projects").add({
-      author: document.getElementById("author").value.trim(),
-      title: document.getElementById("title").value.trim(),
-      description: document.getElementById("description").value.trim(),
-      problem: document.getElementById("problem").value.trim(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
-    formMessage.textContent = "Votre proposition a été enregistrée avec succès !";
-    projectForm.reset();
-
-  } catch (error) {
-    formMessage.textContent = "Erreur : " + error.message;
-  }
-});
 if (configured) startFirebase();
 else renderProjects(demoProjects);
