@@ -9,94 +9,165 @@ main{max-width:1050px;margin:auto;padding:58px 24px}.intro,.results-section{disp
 .project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.project-card{background:white;border:1px solid var(--line);border-radius:16px;padding:23px;box-shadow:0 5px 18px #1b31500a}.project-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.project-number{font-size:.75rem;font-weight:700;color:var(--blue);background:#edf2ff;padding:7px 10px;border-radius:20px}.author{font-size:.82rem;color:var(--muted)}.project-card h3{font:700 1.25rem Manrope;margin:17px 0 9px}.project-card p{font-size:.94rem}.project-card .problem{margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}.problem b{display:block;font-size:.76rem;color:var(--blue);margin-bottom:5px}.empty{grid-column:1/-1;padding:38px 20px;text-align:center;background:white;border:1px dashed #cbd3e1;border-radius:16px;color:var(--muted)}
 .vote-section{margin:75px 0;background:#eaf0ff;border-radius:22px;padding:32px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}.vote-box{background:white;border-radius:16px;padding:22px;box-shadow:0 8px 25px #1b31500c}.vote-box label{display:block;font-weight:700;font-size:.9rem;margin:18px 0 8px}.vote-box select{width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;background:white;font:inherit}.vote-box #auth-status{font-size:.9rem;color:var(--muted);margin-bottom:14px}.message{font-size:.85rem;margin-top:12px!important}.results-list{width:min(100%,520px)}.result-row{margin:12px 0}.result-head{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;margin-bottom:7px}.bar{height:9px;border-radius:20px;background:#e6eaf2;overflow:hidden}.bar span{display:block;height:100%;background:var(--blue);border-radius:20px}.muted{color:var(--muted)}footer{padding:25px 7vw;background:var(--navy);color:white;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:.85rem}footer span{color:#c4cede}
 @media(max-width:700px){.hero{padding:58px 24px}.intro,.results-section{align-items:start;flex-direction:column}.project-grid{grid-template-columns:1fr}.vote-section{grid-template-columns:1fr;padding:23px;margin:55px 0}.count-card{align-self:start}main{padding:42px 18px}footer{flex-direction:column}}
-/* FORMULAIRE DE PROPOSITION */
+/* =====================================
+   V2 - DESIGN MODERNE
+===================================== */
+
+:root {
+  --blue: #315efb;
+  --navy: #101d35;
+  --paper: #f3f6fc;
+  --line: #e4eaf4;
+}
+
+/* Transitions générales */
+body,
+.project-card,
+.count-card,
+.vote-box,
+.submission-section,
+.button {
+  transition: background 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.3s ease;
+}
+
+/* En-tête */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 90% 10%, #527cff 0, transparent 32%),
+    linear-gradient(135deg, #101d35, #234b88);
+}
+
+.hero h1 {
+  letter-spacing: -2px;
+}
+
+.hero p {
+  line-height: 1.8;
+}
+
+/* Cartes des projets */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 8px 25px rgba(20, 36, 58, 0.05);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(20, 36, 58, 0.10);
+  border-color: #b9caff;
+}
+
+.project-card h3 {
+  font-size: 1.35rem;
+  letter-spacing: -0.5px;
+}
+
+.project-number {
+  background: #e9efff;
+  color: #315efb;
+  font-weight: 800;
+}
+
+/* Compteur */
+.count-card {
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(20, 36, 58, 0.04);
+}
+
+/* Zone de vote */
+.vote-section {
+  background: linear-gradient(135deg, #e9efff, #f1f5ff);
+  border: 1px solid #dce6ff;
+  border-radius: 25px;
+}
+
+.vote-box {
+  border: 1px solid #e5eaf2;
+  border-radius: 20px;
+}
+
+/* Formulaire */
 .submission-section {
-  max-width: 850px;
-  margin: 70px auto;
-  padding: 35px;
-  background: #ffffff;
-  border: 1px solid #e8edf3;
-  border-radius: 18px;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
-}
-
-.submission-section h2 {
-  font-size: 28px;
-  color: #142b4a;
-  margin-bottom: 10px;
-}
-
-.submission-section > p {
-  color: #64748b;
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-#project-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-#project-form label {
-  font-weight: 600;
-  color: #263b55;
-  margin-top: 10px;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(20, 36, 58, 0.07);
 }
 
 #project-form input,
-#project-form textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #dce3ec;
-  border-radius: 10px;
-  background: #f8fafc;
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-  transition: 0.2s;
+#project-form textarea,
+.vote-box select {
+  border-radius: 12px;
+  transition: 0.25s ease;
 }
 
 #project-form input:focus,
-#project-form textarea:focus {
-  border-color: #2563eb;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+#project-form textarea:focus,
+.vote-box select:focus {
+  border-color: #315efb;
+  box-shadow: 0 0 0 4px rgba(49, 94, 251, 0.12);
 }
 
-#project-form textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-#project-form button {
-  margin-top: 18px;
-  padding: 15px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
+/* Boutons */
+.button {
+  border-radius: 12px;
   font-weight: 700;
-  cursor: pointer;
 }
 
-#project-form button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+.button-accent {
+  background: linear-gradient(135deg, #315efb, #2448ce);
 }
 
-#form-message {
-  color: #15803d;
-  font-weight: 600;
-  margin-top: 10px;
+.button-accent:hover {
+  box-shadow: 0 7px 18px rgba(49, 94, 251, 0.25);
 }
 
-@media (max-width: 600px) {
-  .submission-section {
-    margin: 35px 15px;
-    padding: 22px 18px;
+/* Résultats */
+.result-row {
+  padding: 14px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+
+.bar {
+  height: 10px;
+  background: #e9edf5;
+}
+
+.bar span {
+  background: linear-gradient(90deg, #315efb, #7194ff);
+}
+
+/* Pied de page */
+footer {
+  background: linear-gradient(120deg, #101d35, #1d3d68);
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+/* Adaptation mobile */
+@media (max-width: 700px) {
+  .project-card {
+    padding: 21px;
   }
 
-  .submission-section h2 {
-    font-size: 23px;
+  .project-card:hover {
+    transform: none;
+  }
+
+  .hero h1 {
+    letter-spacing: -1px;
+  }
+
+  .vote-section {
+    border-radius: 18px;
   }
 }
