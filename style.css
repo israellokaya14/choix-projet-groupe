@@ -1,63 +1,204 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-:root{--navy:#14243a;--blue:#2457d6;--ink:#172033;--muted:#687386;--paper:#f5f7fb;--line:#e5e9f1;--white:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
-.hero{background:radial-gradient(circle at 85% 15%,#416bd7 0,transparent 28%),linear-gradient(120deg,#12233b,#1d3d68);color:white;padding:76px 7vw 82px}
-.hero-inner{max-width:1050px;margin:auto}.eyebrow,.section-tag{font-size:.72rem;font-weight:700;letter-spacing:.15em}.eyebrow{color:#c4d4ff}.hero h1{font:800 clamp(2.5rem,7vw,5rem)/1.05 Manrope,sans-serif;letter-spacing:-.05em;margin:22px 0}.hero h1 span{color:#9db8ff}.hero p{max-width:600px;color:#d9e2f3;font-size:1.08rem;line-height:1.7;margin:0 0 30px}
-.button{border:0;border-radius:10px;padding:13px 18px;font:700 .94rem 'DM Sans';cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;transition:.2s}.button:hover{transform:translateY(-1px);filter:brightness(1.05)}.button-light{background:white;color:var(--navy)}.button-dark{background:var(--navy);color:white;width:100%}.button-accent{background:var(--blue);color:white;width:100%;margin-top:12px}
-main{max-width:1050px;margin:auto;padding:58px 24px}.intro,.results-section{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}.section-tag{color:var(--blue)}h2{font:800 clamp(1.7rem,4vw,2.3rem) Manrope;margin:9px 0}section p{color:var(--muted);line-height:1.65;margin:0;max-width:650px}
-.count-card{background:white;border:1px solid var(--line);border-radius:14px;padding:15px 22px;display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--muted)}.count-card strong{font:800 1.8rem Manrope;color:var(--blue)}
-.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.project-card{background:white;border:1px solid var(--line);border-radius:16px;padding:23px;box-shadow:0 5px 18px #1b31500a}.project-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.project-number{font-size:.75rem;font-weight:700;color:var(--blue);background:#edf2ff;padding:7px 10px;border-radius:20px}.author{font-size:.82rem;color:var(--muted)}.project-card h3{font:700 1.25rem Manrope;margin:17px 0 9px}.project-card p{font-size:.94rem}.project-card .problem{margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}.problem b{display:block;font-size:.76rem;color:var(--blue);margin-bottom:5px}.empty{grid-column:1/-1;padding:38px 20px;text-align:center;background:white;border:1px dashed #cbd3e1;border-radius:16px;color:var(--muted)}
-.vote-section{margin:75px 0;background:#eaf0ff;border-radius:22px;padding:32px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}.vote-box{background:white;border-radius:16px;padding:22px;box-shadow:0 8px 25px #1b31500c}.vote-box label{display:block;font-weight:700;font-size:.9rem;margin:18px 0 8px}.vote-box select{width:100%;padding:13px;border:1px solid var(--line);border-radius:9px;background:white;font:inherit}.vote-box #auth-status{font-size:.9rem;color:var(--muted);margin-bottom:14px}.message{font-size:.85rem;margin-top:12px!important}.results-list{width:min(100%,520px)}.result-row{margin:12px 0}.result-head{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;margin-bottom:7px}.bar{height:9px;border-radius:20px;background:#e6eaf2;overflow:hidden}.bar span{display:block;height:100%;background:var(--blue);border-radius:20px}.muted{color:var(--muted)}footer{padding:25px 7vw;background:var(--navy);color:white;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:.85rem}footer span{color:#c4cede}
-@media(max-width:700px){.hero{padding:58px 24px}.intro,.results-section{align-items:start;flex-direction:column}.project-grid{grid-template-columns:1fr}.vote-section{grid-template-columns:1fr;padding:23px;margin:55px 0}.count-card{align-self:start}main{padding:42px 18px}footer{flex-direction:column}}
+
 /* =====================================
-   V2 - DESIGN MODERNE
+   1. VARIABLES ET CONFIGURATION
 ===================================== */
 
 :root {
+  --navy: #14243a;
   --blue: #315efb;
-  --navy: #101d35;
-  --paper: #f3f6fc;
-  --line: #e4eaf4;
+  --blue-dark: #2448ce;
+  --ink: #172033;
+  --muted: #687386;
+  --paper: #f5f7fb;
+  --line: #e5e9f1;
+  --white: #ffffff;
+  --radius: 16px;
+  --shadow: 0 8px 25px rgba(20, 36, 58, 0.06);
 }
 
-/* Transitions générales */
-body,
-.project-card,
-.count-card,
-.vote-box,
-.submission-section,
-.button {
-  transition: background 0.3s ease,
-              color 0.3s ease,
-              border-color 0.3s ease,
-              box-shadow 0.3s ease,
-              transform 0.3s ease;
+* {
+  box-sizing: border-box;
 }
 
-/* En-tête */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+}
+
+/* =====================================
+   2. EN-TÊTE
+===================================== */
+
 .hero {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 90% 10%, #527cff 0, transparent 32%),
+    radial-gradient(circle at 85% 15%, #527cff 0, transparent 30%),
     linear-gradient(135deg, #101d35, #234b88);
+  color: white;
+  padding: 76px 7vw 82px;
+}
+
+.hero-inner {
+  max-width: 1050px;
+  margin: auto;
+}
+
+.eyebrow,
+.section-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.eyebrow {
+  color: #c4d4ff;
 }
 
 .hero h1 {
-  letter-spacing: -2px;
+  font: 800 clamp(2.5rem, 7vw, 5rem)/1.05 Manrope, sans-serif;
+  letter-spacing: -0.05em;
+  margin: 22px 0;
+}
+
+.hero h1 span {
+  color: #9db8ff;
 }
 
 .hero p {
+  max-width: 600px;
+  color: #d9e2f3;
+  font-size: 1.08rem;
   line-height: 1.8;
+  margin: 0 0 30px;
 }
 
-/* Cartes des projets */
+/* =====================================
+   3. BOUTONS
+===================================== */
+
+.button {
+  border: 0;
+  border-radius: 11px;
+  padding: 13px 19px;
+  font: 700 0.94rem 'DM Sans', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-light {
+  background: white;
+  color: var(--navy);
+}
+
+.button-dark {
+  background: var(--navy);
+  color: white;
+  width: 100%;
+}
+
+.button-accent {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: white;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.button-accent:hover {
+  box-shadow: 0 7px 18px rgba(49, 94, 251, 0.25);
+}
+
+/* =====================================
+   4. CONTENU PRINCIPAL
+===================================== */
+
+main {
+  max-width: 1050px;
+  margin: auto;
+  padding: 58px 24px;
+}
+
+.intro,
+.results-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.section-tag {
+  color: var(--blue);
+}
+
+h2 {
+  font: 800 clamp(1.7rem, 4vw, 2.3rem) Manrope, sans-serif;
+  margin: 9px 0;
+}
+
+section p {
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 650px;
+}
+
+/* =====================================
+   5. COMPTEUR DE PROJETS
+===================================== */
+
+.count-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 15px 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  color: var(--muted);
+  box-shadow: var(--shadow);
+}
+
+.count-card strong {
+  font: 800 1.8rem Manrope, sans-serif;
+  color: var(--blue);
+}
+
+/* =====================================
+   6. CARTES DES PROJETS
+===================================== */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
 .project-card {
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   padding: 26px;
-  box-shadow: 0 8px 25px rgba(20, 36, 58, 0.05);
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
 }
 
 .project-card:hover {
@@ -66,95 +207,315 @@ body,
   border-color: #b9caff;
 }
 
-.project-card h3 {
-  font-size: 1.35rem;
-  letter-spacing: -0.5px;
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .project-number {
-  background: #e9efff;
-  color: #315efb;
+  font-size: 0.75rem;
   font-weight: 800;
-}
-
-/* Compteur */
-.count-card {
-  border-radius: 16px;
-  box-shadow: 0 5px 20px rgba(20, 36, 58, 0.04);
-}
-
-/* Zone de vote */
-.vote-section {
-  background: linear-gradient(135deg, #e9efff, #f1f5ff);
-  border: 1px solid #dce6ff;
-  border-radius: 25px;
-}
-
-.vote-box {
-  border: 1px solid #e5eaf2;
+  color: var(--blue);
+  background: #e9efff;
+  padding: 7px 11px;
   border-radius: 20px;
 }
 
-/* Formulaire */
-.submission-section {
+.author {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.project-card h3 {
+  font: 700 1.3rem Manrope, sans-serif;
+  margin: 17px 0 9px;
+  letter-spacing: -0.5px;
+}
+
+.project-card p {
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.project-card .problem {
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+
+.problem b {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 38px 20px;
+  text-align: center;
+  background: white;
+  border: 1px dashed #cbd3e1;
+  border-radius: 16px;
+  color: var(--muted);
+}
+
+/* =====================================
+   7. ZONE DE VOTE
+===================================== */
+
+.vote-section {
+  margin: 75px 0;
+  background: linear-gradient(135deg, #e9efff, #f1f5ff);
+  border: 1px solid #dce6ff;
   border-radius: 22px;
-  box-shadow: 0 12px 35px rgba(20, 36, 58, 0.07);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 30px;
+  align-items: center;
 }
 
-#project-form input,
-#project-form textarea,
-.vote-box select {
-  border-radius: 12px;
-  transition: 0.25s ease;
+.vote-box {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: var(--shadow);
 }
 
-#project-form input:focus,
-#project-form textarea:focus,
-.vote-box select:focus {
-  border-color: #315efb;
-  box-shadow: 0 0 0 4px rgba(49, 94, 251, 0.12);
-}
-
-/* Boutons */
-.button {
-  border-radius: 12px;
+.vote-box label {
+  display: block;
   font-weight: 700;
+  font-size: 0.9rem;
+  margin: 18px 0 8px;
 }
 
-.button-accent {
-  background: linear-gradient(135deg, #315efb, #2448ce);
+.vote-box select {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dce3ef;
+  border-radius: 10px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  outline: none;
 }
 
-.button-accent:hover {
-  box-shadow: 0 7px 18px rgba(49, 94, 251, 0.25);
+.vote-box #auth-status {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 14px;
 }
 
-/* Résultats */
+.message {
+  font-size: 0.85rem;
+  margin-top: 12px !important;
+}
+
+/* =====================================
+   8. RÉSULTATS DES VOTES
+===================================== */
+
+.results-list {
+  width: min(100%, 520px);
+}
+
 .result-row {
+  margin: 12px 0;
   padding: 14px;
   background: white;
   border: 1px solid var(--line);
   border-radius: 13px;
 }
 
+.result-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+  margin-bottom: 7px;
+}
+
 .bar {
   height: 10px;
+  border-radius: 20px;
   background: #e9edf5;
+  overflow: hidden;
 }
 
 .bar span {
-  background: linear-gradient(90deg, #315efb, #7194ff);
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), #7194ff);
+  border-radius: 20px;
 }
 
-/* Pied de page */
+.muted {
+  color: var(--muted);
+}
+
+/* =====================================
+   9. FORMULAIRE DE PROPOSITION
+===================================== */
+
+.submission-section {
+  max-width: 850px;
+  margin: 70px auto;
+  padding: 35px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(20, 36, 58, 0.07);
+}
+
+.submission-section h2 {
+  font-size: 28px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.submission-section > p {
+  color: var(--muted);
+  margin-bottom: 30px;
+  line-height: 1.7;
+}
+
+#project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#project-form label {
+  display: block;
+  font-weight: 600;
+  color: var(--navy);
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+#project-form input,
+#project-form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid #dce3ec;
+  border-radius: 11px;
+  background: #f8fafc;
+  color: var(--ink);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+#project-form input:focus,
+#project-form textarea:focus {
+  border-color: var(--blue);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(49, 94, 251, 0.12);
+}
+
+#project-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+#project-form button {
+  margin-top: 18px;
+  padding: 15px;
+  border: none;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: white;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+#project-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(49, 94, 251, 0.25);
+}
+
+#form-message {
+  color: #15803d;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* =====================================
+   10. PIED DE PAGE
+===================================== */
+
 footer {
+  padding: 35px 7vw;
   background: linear-gradient(120deg, #101d35, #1d3d68);
-  padding-top: 35px;
-  padding-bottom: 35px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
 }
 
-/* Adaptation mobile */
+footer span {
+  color: #c4cede;
+}
+
+/* =====================================
+   11. ANIMATIONS ET TRANSITIONS
+===================================== */
+
+body,
+.project-card,
+.count-card,
+.vote-box,
+.submission-section,
+.button {
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* =====================================
+   12. RESPONSIVE - TABLETTES ET MOBILES
+===================================== */
+
 @media (max-width: 700px) {
+
+  .hero {
+    padding: 58px 24px;
+  }
+
+  .hero h1 {
+    letter-spacing: -0.03em;
+  }
+
+  main {
+    padding: 42px 18px;
+  }
+
+  .intro,
+  .results-section {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
   .project-card {
     padding: 21px;
   }
@@ -163,11 +524,28 @@ footer {
     transform: none;
   }
 
-  .hero h1 {
-    letter-spacing: -1px;
+  .vote-section {
+    grid-template-columns: 1fr;
+    padding: 23px;
+    margin: 55px 0;
+    border-radius: 18px;
   }
 
-  .vote-section {
-    border-radius: 18px;
+  .count-card {
+    align-self: flex-start;
+  }
+
+  .submission-section {
+    margin: 35px 15px;
+    padding: 22px 18px;
+  }
+
+  .submission-section h2 {
+    font-size: 23px;
+  }
+
+  footer {
+    flex-direction: column;
+    padding: 30px 24px;
   }
 }
